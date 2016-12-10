@@ -5,12 +5,12 @@ import (
 	"golang.org/x/text/encoding/charmap"
 )
 
-type escpos struct {
+type Escpos struct {
 	enc *encoding.Encoder
 }
 
-func NewEscpos() *escpos {
-	return &escpos{
+func NewEscpos() *Escpos {
+	return &Escpos{
 		enc: charmap.CodePage437.NewEncoder(),
 	}
 }

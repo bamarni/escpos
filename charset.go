@@ -1,8 +1,6 @@
 package escpos
 
 import (
-	"fmt"
-
 	"golang.org/x/text/encoding/charmap"
 )
 
@@ -80,18 +78,16 @@ import (
 // 		254	Page 254
 // 		255	Page 255
 
-type charset byte
-
 const (
-	CharsetPC437 charset = 0
-	CharsetPC850 charset = 2
-	CharsetPC860 charset = 3
-	CharsetPC863 charset = 4
-	CharsetPC865 charset = 5
+	CharsetPC437 byte = 0
+	CharsetPC850 byte = 2
+	CharsetPC860 byte = 3
+	CharsetPC863 byte = 4
+	CharsetPC865 byte = 5
 	// whatever...
 )
 
-func (e *escpos) Charset(c charset) string {
+func (e *Escpos) Charset(c byte) []byte {
 	switch c {
 	case CharsetPC437:
 		e.enc = charmap.CodePage437.NewEncoder()
@@ -104,5 +100,5 @@ func (e *escpos) Charset(c charset) string {
 	case CharsetPC865:
 		e.enc = charmap.CodePage865.NewEncoder()
 	}
-	return fmt.Sprintf("\x1Bt%c", c)
+	return []byte{27, 116, c}
 }

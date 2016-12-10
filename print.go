@@ -1,5 +1,5 @@
 package escpos
 
-func (e *escpos) Print(s string) (string, error) {
-	return e.enc.String(s)
+func (e *Escpos) Print(s string) ([]byte, error) {
+	return e.enc.Bytes([]byte(s))
 }
