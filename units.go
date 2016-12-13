@@ -13,5 +13,5 @@ package escpos
 // 			When y = 0, the default value of the vertical motion unit is used.
 
 func (e *Escpos) Units(x, y byte) []byte {
-	return []bytes{29, 80, x, y}
+	return []byte{29, 80, x, y}
 }

@@ -22,6 +22,6 @@ const (
 	BarcodeHRIBoth   byte = 3
 )
 
-func (e *Escpos) BarcodeHri(n byte) []byte {
+func (e *Escpos) BarcodeHRI(n byte) []byte {
 	return []byte{29, 72, n}
 }

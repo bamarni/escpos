@@ -49,5 +49,5 @@ const (
 
 func (e *Escpos) Barcode(m byte, data string) ([]byte, error) {
 	// TODO: validate data according to the barcode system
-	return append([]byte{29, 107, m}, data...), nil
+	return append(append([]byte{29, 107, m}, data...), 0), nil
 }
