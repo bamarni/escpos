@@ -51,3 +51,56 @@ func (e *Escpos) Barcode(m byte, data string) ([]byte, error) {
 	// TODO: validate data according to the barcode system
 	return append(append([]byte{29, 107, m}, data...), 0), nil
 }
+
+// [Name]	Set barcode height
+// [Format]
+//	 ASCII	   	GS	  	h	  	n
+//	 Hex		1D		68		n
+//	 Decimal	29		104		n
+// [Range]	n = 1 – 255
+// [Default]	n: different depending on the printers
+// [Description] 	Sets the height of a barcode to n dots.
+
+func (e *Escpos) BarcodeHeight(n byte) []byte {
+	return []byte{29, 104, n}
+}
+
+// [Name]	Select print position of HRI characters
+// [Format]
+// 	ASCII	   	GS	  	H	  	n
+// 	Hex		1D		48		n
+// 	Decimal		29		72		n
+// [Range]	n = 0 – 3
+// 		n = 48 – 51
+// [Default]	n = 0
+// [Description] 	Selects the print position of Human Readable Interpretation (HRI) characters when printing a barcode, using n as follows:
+// 	n	Print position
+// 	0, 48	Not printed
+// 	1, 49	Above the barcode
+// 	2, 50	Below the barcode
+// 	3, 51	Both above and below the barcode
+
+const (
+	BarcodeHRINone   byte = 0
+	BarcodeHRITop    byte = 1
+	BarcodeHRIBottom byte = 2
+	BarcodeHRIBoth   byte = 3
+)
+
+func (e *Escpos) BarcodeHRI(n byte) []byte {
+	return []byte{29, 72, n}
+}
+
+// [Name]	Set barcode width
+// [Format]
+// 	ASCII	   	GS	  	w	  	n
+// 	Hex		1D		77		n
+// 	Decimal		29		119		n
+// [Range]	n: different depending on the printers
+// [Default]	n: different depending on the printers
+// [Description]	Sets the horizontal size of a barcode.
+// 			n specifies the barcode module width.
+
+func (e *Escpos) BarcodeWidth(n byte) []byte {
+	return []byte{29, 119, n}
+}
