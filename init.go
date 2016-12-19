@@ -13,6 +13,6 @@ package escpos
 // 			The maintenance counter value is not affected by this command.
 // 			The specifying of offline response isn't cleared.
 
-func (e *Escpos) Init() []byte {
-	return []byte{27, 64}
+func (e *Escpos) Init() error {
+	return e.write([]byte{27, 64})
 }

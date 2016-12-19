@@ -17,6 +17,6 @@ const (
 	ColorRed   byte = 1
 )
 
-func (e *Escpos) Color(n byte) []byte {
-	return []byte{27, 114, n}
+func (e *Escpos) Color(n byte) error {
+	return e.write([]byte{27, 114, n})
 }

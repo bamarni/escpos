@@ -12,6 +12,6 @@ package escpos
 // 			When x = 0, the default value of the horizontal motion unit is used.
 // 			When y = 0, the default value of the vertical motion unit is used.
 
-func (e *Escpos) Units(x, y byte) []byte {
-	return []byte{29, 80, x, y}
+func (e *Escpos) Units(x, y byte) error {
+	return e.write([]byte{29, 80, x, y})
 }

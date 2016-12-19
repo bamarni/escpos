@@ -16,9 +16,10 @@ package escpos
 // [Default]		None
 // [Description] 	Prints the data in the print buffer and feeds n lines.
 
-func (e *Escpos) Lf(n byte) []byte {
+func (e *Escpos) Lf(n byte) error {
 	if n > 1 {
-		return []byte{27, 100, n}
+		_, err := e.w.Write([]byte{27, 100, n})
+		return err
 	}
-	return []byte{10}
+	return e.write([]byte{10})
 }

@@ -47,9 +47,9 @@ const (
 	BarcodeCODABAR byte = 6
 )
 
-func (e *Escpos) Barcode(m byte, data string) ([]byte, error) {
+func (e *Escpos) Barcode(m byte, data string) error {
 	// TODO: validate data according to the barcode system
-	return append(append([]byte{29, 107, m}, data...), 0), nil
+	return e.write(append(append([]byte{29, 107, m}, data...), 0))
 }
 
 // [Name]	Set barcode height
@@ -61,8 +61,8 @@ func (e *Escpos) Barcode(m byte, data string) ([]byte, error) {
 // [Default]	n: different depending on the printers
 // [Description] 	Sets the height of a barcode to n dots.
 
-func (e *Escpos) BarcodeHeight(n byte) []byte {
-	return []byte{29, 104, n}
+func (e *Escpos) BarcodeHeight(n byte) error {
+	return e.write([]byte{29, 104, n})
 }
 
 // [Name]	Select print position of HRI characters
@@ -87,8 +87,8 @@ const (
 	BarcodeHRIBoth   byte = 3
 )
 
-func (e *Escpos) BarcodeHRI(n byte) []byte {
-	return []byte{29, 72, n}
+func (e *Escpos) BarcodeHRI(n byte) error {
+	return e.write([]byte{29, 72, n})
 }
 
 // [Name]	Set barcode width
@@ -101,6 +101,6 @@ func (e *Escpos) BarcodeHRI(n byte) []byte {
 // [Description]	Sets the horizontal size of a barcode.
 // 			n specifies the barcode module width.
 
-func (e *Escpos) BarcodeWidth(n byte) []byte {
-	return []byte{29, 119, n}
+func (e *Escpos) BarcodeWidth(n byte) error {
+	return e.write([]byte{29, 119, n})
 }

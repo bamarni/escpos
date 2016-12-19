@@ -1,18 +1,20 @@
 package escpos
 
-import "testing"
+import (
+	"io/ioutil"
+	"testing"
+)
 
 func TestCharset(t *testing.T) {
-	e := NewEscpos()
+	e := NewEscpos(ioutil.Discard)
 
-	var err error
 	// PC437 doesn't support Ê
-	if _, err := e.Print("Être ou ne pas être"); err == nil {
+	if err := e.Print("Être ou ne pas être"); err == nil {
 		t.Fatalf("expected error")
 	}
 	// but PC850 does
 	e.Charset(CharsetPC850)
-	if _, err = e.Print("Être ou ne pas être"); err != nil {
+	if err := e.Print("Être ou ne pas être"); err != nil {
 		t.Fatalf("unexpected error : %s", err)
 	}
 }

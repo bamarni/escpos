@@ -9,6 +9,6 @@ package escpos
 // [Default]	Entire printable area
 // [Description] 	In Standard mode, sets the print area width to (nL + nH × 256) × (horizontal motion unit).
 
-func (e *Escpos) Width(n uint16) []byte {
-	return []byte{29, 87, byte(n & 0xff), byte(n >> 8)}
+func (e *Escpos) Width(n uint16) error {
+	return e.write([]byte{29, 87, byte(n & 0xff), byte(n >> 8)})
 }

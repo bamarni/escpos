@@ -19,6 +19,6 @@ const (
 	AlignRight  byte = 2
 )
 
-func (e *Escpos) Align(a byte) []byte {
-	return []byte{27, 97, a}
+func (e *Escpos) Align(a byte) error {
+	return e.write([]byte{27, 97, a})
 }

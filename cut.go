@@ -33,30 +33,16 @@ package escpos
 // 	<Function C>	Preset [cutting position + (n × vertical motion unit)] to the paper cutting position, and executes paper cut when it reaches the autocutter position after printing and feeding
 // 	<Function D>	Feeds paper to [cutting position + (n × vertical motion unit)] and executes paper cut, then moves paper to the print start position by reverse feeding
 
-func (e *Escpos) Cut(partial bool) []byte {
+func (e *Escpos) Cut(partial bool) error {
 	if partial {
-		return []byte{29, 86, 1}
+		return e.write([]byte{29, 86, 1})
 	}
-	return []byte{29, 86, 0}
+	return e.write([]byte{29, 86, 0})
 }
 
-func (e *Escpos) CutB(partial bool, n byte) []byte {
+func (e *Escpos) CutB(partial bool, n byte) error {
 	if partial {
-		return []byte{29, 86, 66, n}
+		return e.write([]byte{29, 86, 66, n})
 	}
-	return []byte{29, 86, 65, n}
-}
-
-func (e *Escpos) CutC(partial bool, n byte) []byte {
-	if partial {
-		return []byte{29, 86, 98, n}
-	}
-	return []byte{29, 86, 97, n}
-}
-
-func (e *Escpos) CutD(partial bool, n byte) []byte {
-	if partial {
-		return []byte{29, 86, 104, n}
-	}
-	return []byte{29, 86, 103, n}
+	return e.write([]byte{29, 86, 65, n})
 }

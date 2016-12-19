@@ -9,6 +9,6 @@ package escpos
 // [Default]	(nL + nH × 256) = 0
 // [Description] 	In Standard mode, sets the left margin to (nL + nH × 256) × (horizontal motion unit) from the left edge of the printable area.
 
-func (e *Escpos) MarginLeft(n uint16) []byte {
-	return []byte{29, 76, byte(n & 0xff), byte(n >> 8)}
+func (e *Escpos) MarginLeft(n uint16) error {
+	return e.write([]byte{29, 76, byte(n & 0xff), byte(n >> 8)})
 }

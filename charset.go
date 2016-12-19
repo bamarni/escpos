@@ -84,15 +84,18 @@ const (
 	CharsetPC860 byte = 3
 	CharsetPC863 byte = 4
 	CharsetPC865 byte = 5
+	CharsetPC858 byte = 19
 	// whatever...
 )
 
-func (e *Escpos) Charset(c byte) []byte {
+func (e *Escpos) Charset(c byte) error {
 	switch c {
 	case CharsetPC437:
 		e.enc = charmap.CodePage437.NewEncoder()
 	case CharsetPC850:
 		e.enc = charmap.CodePage850.NewEncoder()
+	case CharsetPC858:
+		e.enc = charmap.CodePage858.NewEncoder()
 	case CharsetPC860:
 		e.enc = charmap.CodePage860.NewEncoder()
 	case CharsetPC863:
@@ -100,5 +103,6 @@ func (e *Escpos) Charset(c byte) []byte {
 	case CharsetPC865:
 		e.enc = charmap.CodePage865.NewEncoder()
 	}
-	return []byte{27, 116, c}
+
+	return e.write([]byte{27, 116, c})
 }

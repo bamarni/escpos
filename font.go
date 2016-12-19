@@ -27,8 +27,8 @@ const (
 // 	97	Special font A
 // 	98	Special font B
 
-func (e *Escpos) Font(n byte) []byte {
-	return []byte{27, 77, n}
+func (e *Escpos) Font(n byte) error {
+	return e.write([]byte{27, 77, n})
 }
 
 // [Name]	Select font for HRI characters
@@ -48,6 +48,6 @@ func (e *Escpos) Font(n byte) []byte {
 // 	97	Special font A
 // 	98	Special font B
 
-func (e *Escpos) BarcodeFont(n byte) []byte {
-	return []byte{29, 102, n}
+func (e *Escpos) BarcodeFont(n byte) error {
+	return e.write([]byte{29, 102, n})
 }
