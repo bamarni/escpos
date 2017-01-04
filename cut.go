@@ -46,3 +46,17 @@ func (e *Escpos) CutB(partial bool, n byte) error {
 	}
 	return e.write([]byte{29, 86, 65, n})
 }
+
+func (e *Escpos) CutC(partial bool, n byte) error {
+	if partial {
+		return e.write([]byte{29, 86, 98, n})
+	}
+	return e.write([]byte{29, 86, 97, n})
+}
+
+func (e *Escpos) CutD(partial bool, n byte) error {
+	if partial {
+		return e.write([]byte{29, 86, 104, n})
+	}
+	return e.write([]byte{29, 86, 103, n})
+}
